@@ -1,5 +1,9 @@
 package cfranc.hanoi;
 
+import sun.util.resources.cldr.ar.CalendarData_ar_IQ;
+
+import java.util.*;
+
 public class Hanoi {
 	
 	Tour tourInit;
@@ -8,6 +12,27 @@ public class Hanoi {
 
 	public Hanoi(int n){
 		// TODO ...
+		//initialise les 3 tours
+		tourInit = new Tour(100);
+		tourInter = new Tour(100);
+		tourDest = new Tour(100);
+
+		int i;
+
+		//liste de disques
+		List<Disque> lesDisques = new ArrayList<>();
+		//créer tous les disques
+		for(i = 0; i < n; i++){
+			lesDisques.add(new Disque(i+1));
+		}
+
+		Collections.reverse(lesDisques);
+
+		//ajoute les disques sur la premiére tour
+		for(i = 0; i<lesDisques.size(); i++){
+			tourInit.empiler(lesDisques.get(i));
+		}
+
 	}
 
 	
@@ -28,6 +53,7 @@ public class Hanoi {
 		tourInter = new Tour();
 		tourDest = new Tour();
 		// TODO ...
+
 	}
 
 	public void deplacer(int nbDisque, Tour from, Tour to, Tour by){
